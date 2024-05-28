@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITask extends Document {
-  employeeId: string;
+  employeeId: number;
   title: string;
   description: string;
   dueDate: Date;

@@ -1,7 +1,7 @@
 import {Status} from 'src/dto/status/status';
 
 export class TaskSaveDto {
-  employeeId?: string;
+  employeeId?: number;
   title?: string;
   description?: string;
   dueDate?: Date;

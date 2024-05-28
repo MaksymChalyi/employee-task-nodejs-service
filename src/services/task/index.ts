@@ -3,6 +3,8 @@ import axios from 'axios';
 import { TaskSaveDto } from 'src/dto/task/taskSaveDto';
 import Task, { ITask } from 'src/model/task';
 import { InternalError } from 'src/system/internalError';
+import {TaskQueryDto} from "../../dto/task/TaskQueryDto";
+import httpStatus from "http-status";
 
 const EMPLOYEE_SERVICE_URL = 'http://localhost:8080/api/employee/';
 
@@ -38,5 +40,26 @@ export const createTask = async (taskSaveDto: TaskSaveDto): Promise<ITask> => {
   } catch (error) {
     logger.error('Error in creating tasks.', error);
     throw new InternalError(error);
+  }
+};
+
+export const getTaskList = async (query: TaskQueryDto) => {
+  try {
+    const { employeeId, size, from } = query;
+
+    if (!employeeId) {
+      throw new Error('employeeId is required');
+    }
+
+
+    const taskList = await Task.find({ employeeId })
+      .sort({ dueDate: -1 }) // сортування за спаданням за датою
+      .skip(from || 0) // пропускаємо перші "from" завдань
+      .limit(size || 10); // обмежуємо кількість завдань за замовчуванням на 10
+
+    return { status: httpStatus.OK, data: taskList };
+  } catch (error) {
+    console.error('Error while fetching Task list:', error);
+    throw { status: httpStatus.INTERNAL_SERVER_ERROR, message: 'Internal server error' };
   }
 };

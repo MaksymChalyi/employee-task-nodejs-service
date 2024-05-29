@@ -1,5 +1,34 @@
-# nodejs-sample
-This is an example node js project using typescript, consul, express, mongoose, mocha.
+# Tasks Service
+This is an example Node.js project using TypeScript, Consul, Express, Mongoose, and Mocha, which comprises the Tasks service. It's designed to interact with two entities: Employee and Tasks, utilizing MongoDB as its database.
+
+# Endpoints
+```
+POST /api/tasks (Creates a new Task entity.)
+```
+- Validates mandatory fields and their formats.
+- Automatically sets the time field if it's absent in the request.
+- Requires the ID of Employee within the JSON request object.
+- Validates the existence of the corresponding Employee object by querying the service developed in Task 2.
+
+![img_2.png](images/img_2.png)
+
+---
+```
+GET /api/tasks (Returns a list of Task entities associated with a single Employee entity, sorted in descending order of time (latest first).)
+```
+
+- Query Parameters
+- employeeId: Required ID of Employee.
+- size: Maximum number of objects to be returned in the response.
+- from: Starting index of the selection.
+
+![img_1.png](images/img_1.png)
+---
+
+```
+POST /api/tasks/_counts (Accepts an array of Employee IDs and returns the total count of Task elements associated with each Employee ID.)
+```
+![img.png](images/img.png)
 
 # How to run "for the prod"
 

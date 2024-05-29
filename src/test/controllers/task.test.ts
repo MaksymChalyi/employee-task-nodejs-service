@@ -7,7 +7,6 @@ import * as taskService from '../../services/task';
 import { getTaskCountsController, getTasksByEmployeeId, saveTask } from "../../controllers/task";
 import {ObjectId} from "mongodb";
 import {TaskSaveDto} from "../../dto/task/taskSaveDto";
-// import {ITask} from "../../model/task";
 
 const { expect } = chai;
 
